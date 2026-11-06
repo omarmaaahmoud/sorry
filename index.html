@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff6f8">
+  <title>لنور، بكل الحب 💗</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #553946;
+      --pink: #e96f91;
+      --pink-deep: #d9577d;
+      --cream: #fffaf7;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100svh;
+      margin: 0;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 15%, #ffe1e9 0, transparent 34%),
+        radial-gradient(ellipse at 88% 85%, #ffe9d6 0, transparent 32%),
+        linear-gradient(145deg, #fff8f8, #fff6ed 55%, #fff0f4);
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    .sparkles, .sparkles::before, .sparkles::after {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      content: "";
+      background-image:
+        radial-gradient(circle, #ef9cb0 1.5px, transparent 2px),
+        radial-gradient(circle, #f5c17e 1.5px, transparent 2px),
+        radial-gradient(circle, #d7a6d1 1px, transparent 2px);
+      background-size: 137px 151px, 191px 173px, 109px 127px;
+      background-position: 7px 22px, 65px 85px, 38px 51px;
+      opacity: .32;
+    }
+
+    .sparkles::before {
+      transform: translate(52px, 37px);
+      opacity: .45;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 490px);
+      padding: 48px 34px 38px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 32px;
+      background: rgba(255, 252, 250, .82);
+      box-shadow: 0 24px 70px rgba(157, 91, 111, .14), inset 0 1px 0 #fff;
+      backdrop-filter: blur(12px);
+      animation: arrive .8s cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    .heart-badge {
+      width: 76px;
+      height: 76px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 20px;
+      border-radius: 26px;
+      background: linear-gradient(145deg, #ffe0e8, #fff0e2);
+      box-shadow: 0 9px 22px rgba(220, 112, 143, .16);
+      animation: heartbeat 1.7s ease-in-out infinite;
+    }
+
+    .heart-badge::before {
+      width: 36px;
+      height: 36px;
+      display: block;
+      background: linear-gradient(145deg, #f08aa4, #df5f84);
+      clip-path: polygon(50% 92%, 8% 52%, 8% 29%, 20% 12%, 39% 12%, 50% 25%, 61% 12%, 80% 12%, 92% 29%, 92% 52%);
+      content: "";
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #c47c91;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+
+    h1 {
+      margin: 0;
+      color: #684453;
+      font-size: clamp(31px, 8vw, 42px);
+      line-height: 1.3;
+    }
+
+    .message {
+      max-width: 340px;
+      margin: 16px auto 28px;
+      color: #886b76;
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .question {
+      margin: 0 0 17px;
+      color: #704b59;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .buttons {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    button {
+      min-height: 50px;
+      border: 0;
+      border-radius: 999px;
+      padding: 0 21px;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #yesButton {
+      color: white;
+      background: linear-gradient(135deg, #f08aa4, #df5f84);
+      box-shadow: 0 8px 18px rgba(217, 87, 125, .28);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    #yesButton:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 11px 23px rgba(217, 87, 125, .34);
+    }
+
+    #noButton {
+      position: relative;
+      z-index: 5;
+      color: #936c79;
+      background: #fff;
+      border: 1px solid #f1dce2;
+      box-shadow: 0 5px 14px rgba(112, 75, 89, .08);
+      transition: left .2s ease, top .2s ease, transform .2s ease;
+    }
+
+    .tiny-note {
+      margin: 20px 0 0;
+      color: #b08b96;
+      font-size: 12px;
+    }
+
+    #successMessage {
+      display: none;
+      margin: 18px 0 0;
+      color: #c34f75;
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.7;
+      animation: arrive .45s ease both;
+    }
+
+    @keyframes arrive {
+      from { opacity: 0; transform: translateY(14px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      9% { transform: scale(1.08); }
+      18% { transform: scale(1); }
+      27% { transform: scale(1.05); }
+      36% { transform: scale(1); }
+    }
+
+    @media (max-width: 420px) {
+      body { padding: 16px; }
+      .card { padding: 38px 22px 30px; border-radius: 27px; }
+      .message { font-size: 15px; }
+      .buttons { gap: 9px; }
+      button { padding: 0 16px; font-size: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkles" aria-hidden="true"></div>
+  <main class="card">
+    <div class="heart-badge" aria-hidden="true"></div>
+    <p class="eyebrow">رسالة صغيرة من قلبي 💗</p>
+    <h1>يا نور ❤️</h1>
+    <p class="message">حبيت أقولك إنك من الناس اللي وجودها في حياتي بيفرق معايا فعلًا وإن الكلام معاكي دايمًا بيخليني مبسوط.<br><br>بحب أشاركك يومي وأسمع منك حتى لو بنتكلم في أبسط الحاجات.<br><br>أتمنى دايمًا نفضل كويسين مع بعض ونفضل نضحك ونتكلم زي ما بنحب 😊</p>
+    <p class="question">تسامحيني؟ 🥹</p>
+    <div class="buttons">
+      <button id="yesButton" type="button">مسامحاك يا حبيبي 💕</button>
+      <button id="noButton" type="button" aria-label="لأ، حاولي تضغطي عليّ">لأ</button>
+    </div>
+    <p id="successMessage" role="status" aria-live="polite">بحبك يا نور ربنا يخليكي ليا.</p>
+    <p class="tiny-note">اختاري من قلبك.. بس متتأخريش في الرد 😂</p>
+  </main>
+
+  <script>
+    const noButton = document.querySelector('#noButton');
+    const yesButton = document.querySelector('#yesButton');
+    const successMessage = document.querySelector('#successMessage');
+    let dodgeCount = 0;
+
+    function dodgeButton() {
+      const margin = 14;
+      const maxX = Math.max(margin, window.innerWidth - noButton.offsetWidth - margin);
+      const maxY = Math.max(margin, window.innerHeight - noButton.offsetHeight - margin);
+      let x;
+      let y;
+
+      // Try a few times to keep the runaway button away from the pointer.
+      for (let attempt = 0; attempt < 12; attempt++) {
+        x = margin + Math.random() * (maxX - margin);
+        y = margin + Math.random() * (maxY - margin);
+        const dx = x + noButton.offsetWidth / 2 - (window.innerWidth / 2);
+        const dy = y + noButton.offsetHeight / 2 - (window.innerHeight / 2);
+        if (Math.hypot(dx, dy) > 110 || attempt === 11) break;
+      }
+
+      noButton.style.position = 'fixed';
+      noButton.style.left = `${x}px`;
+      noButton.style.top = `${y}px`;
+      noButton.style.transform = `rotate(${Math.random() * 16 - 8}deg)`;
+      dodgeCount++;
+      if (dodgeCount % 3 === 0) noButton.textContent = 'مش هتعرفي';
+      else if (dodgeCount % 3 === 1 && dodgeCount > 1) noButton.textContent = 'لأ';
+    }
+
+    noButton.addEventListener('pointerenter', dodgeButton);
+    noButton.addEventListener('touchstart', (event) => {
+      event.preventDefault();
+      dodgeButton();
+    }, { passive: false });
+    noButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      dodgeButton();
+    });
+
+    yesButton.addEventListener('click', () => {
+      successMessage.style.display = 'block';
+      yesButton.textContent = 'بحبك يا نور';
+      noButton.style.display = 'none';
+      document.querySelector('.tiny-note').style.display = 'none';
+    });
+
+    window.addEventListener('resize', () => {
+      if (noButton.style.position === 'fixed') dodgeButton();
+    });
+  </script>
+</body>
+</html>
+
